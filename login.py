@@ -16,6 +16,7 @@ def login():
 
     if user in VALID_USERS and VALID_USERS[user] == password:
         root.destroy()
+        #modify with actual subprocess to run the experiment
         subprocess.run(["python3", "subprocesstest.py"])
     else:
         messagebox.showerror("Error", "Invalid credentials")
