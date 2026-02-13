@@ -11,7 +11,7 @@ screen_height = root.winfo_screenheight()
 canvas = tk.Canvas(root, width=screen_width, height=screen_height, bg="white")
 canvas.pack()
 
-tk.Label(root, text="I LOVE YOU, LISTEN TO THE FEMCELS", font=("Helvetica", 50, "bold"), fg="red").place(relx=0.5, rely=0.1, anchor="center")
+tk.Label(root, text="Hello", font=("Helvetica", 50, "bold"), fg="red").place(relx=0.5, rely=0.1, anchor="center")
 # Draw a heart shape using polygon coordinates
 heart_points = [
     400, 450,   # bottom tip
