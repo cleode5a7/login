@@ -4,41 +4,48 @@ import subprocess
 
 #dict of valid users and their passwords
 VALID_USERS = {
-    "student1": "pass123",
+    "Snow": "pass123",
     "student2": "abc456"
 }
 
-#function to handle login
-def login():
+class LoginApp:
 
-    user = entry_user.get()
-    password = entry_pass.get()
+    #main window
 
-    if user in VALID_USERS and VALID_USERS[user] == password:
-        root.destroy()
-        #modify with actual subprocess to run the experiment
-        subprocess.run(["python3", "subprocesstest.py"])
-    else:
-        messagebox.showerror("Error", "Invalid credentials")
+    def __init__(self, root,path_to_experiment):
+        self.root = root
+        self.path_to_experiment = path_to_experiment
+
+        self.frame = tk.Frame(root)
+        self.frame.place(relx=0.5, rely=0.5, anchor="center")
+
+        tk.Label(self.frame, text="User ID",font=("Helvetica", 50, "bold")).pack()
+        self.entry_user = tk.Entry(self.frame,font=("Helvetica", 50, "bold"))
+        self.entry_user.pack()
+
+        tk.Label(self.frame, text="Password", font=("Helvetica", 50, "bold")).pack()
+        self.entry_pass = tk.Entry(self.frame,font=("Helvetica", 50, "bold"), show="*")
+        self.entry_pass.pack()
+
+        tk.Button(self.frame, text="Login", font=("Helvetica", 50, "bold"), command=self.login).pack()
+
+        
+
+        
 
 
-#main window
+    #function to handle login
+    def login(self):
 
-root = tk.Tk()
-root.title("Login")
-root.attributes("-fullscreen", True)
+        user = self.entry_user.get()
+        password = self.entry_pass.get()
 
-frame = tk.Frame(root)
-frame.place(relx=0.5, rely=0.5, anchor="center")
+        if user in VALID_USERS and VALID_USERS[user] == password:
+            self.root.destroy()
+            
+            subprocess.run(["python3", self.path_to_experiment])
+        else:
+            messagebox.showerror("Error", "Invalid credentials")
 
-tk.Label(frame, text="User ID",font=("Helvetica", 50, "bold")).pack()
-entry_user = tk.Entry(frame,font=("Helvetica", 50, "bold"))
-entry_user.pack()
 
-tk.Label(frame, text="Password", font=("Helvetica", 50, "bold")).pack()
-entry_pass = tk.Entry(frame,font=("Helvetica", 50, "bold"), show="*")
-entry_pass.pack()
-
-tk.Button(frame, text="Login", font=("Helvetica", 50, "bold"), command=login).pack()
-
-root.mainloop()
+    
