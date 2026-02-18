@@ -3,10 +3,7 @@ from tkinter import messagebox
 import subprocess
 
 #dict of valid users and their passwords
-VALID_USERS = {
-    "Snow": "pass123",
-    "student2": "abc456"
-}
+VALID_USERS = ["SNOW"]
 
 class LoginApp:
 
@@ -23,9 +20,7 @@ class LoginApp:
         self.entry_user = tk.Entry(self.frame,font=("Helvetica", 50, "bold"))
         self.entry_user.pack()
 
-        tk.Label(self.frame, text="Password", font=("Helvetica", 50, "bold")).pack()
-        self.entry_pass = tk.Entry(self.frame,font=("Helvetica", 50, "bold"), show="*")
-        self.entry_pass.pack()
+        
 
         tk.Button(self.frame, text="Login", font=("Helvetica", 50, "bold"), command=self.login).pack()
 
@@ -38,9 +33,9 @@ class LoginApp:
     def login(self):
 
         user = self.entry_user.get()
-        password = self.entry_pass.get()
+       
 
-        if user in VALID_USERS and VALID_USERS[user] == password:
+        if user in VALID_USERS:
             self.root.destroy()
             
             subprocess.run(["python3", self.path_to_experiment])
