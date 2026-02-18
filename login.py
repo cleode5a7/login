@@ -9,9 +9,10 @@ class LoginApp:
 
     #main window
 
-    def __init__(self, root,path_to_experiment):
+    def __init__(self, root,path_to_experiment, script_args=None):
         self.root = root
         self.path_to_experiment = path_to_experiment
+        self.script_args = None or []
 
         self.frame = tk.Frame(root)
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
@@ -33,11 +34,10 @@ class LoginApp:
     def login(self):
 
         user = self.entry_user.get()
-        script_path = self.path_to_experiment
-        script_dir = os.path.dirname(script_path)
+        script_dir = os.path.dirname(self.script_path)
 
         subprocess.run(
-        ["bash", script_path],
+        ["bash", self.script_path] + self.script_args,
         cwd=script_dir,
         check=True
         )
