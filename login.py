@@ -33,6 +33,16 @@ class LoginApp:
     def login(self):
 
         user = self.entry_user.get()
+        script_path = self.path_to_experiment
+        script_dir = os.path.dirname(script_path)
+
+        subprocess.run(
+        ["bash", script_path],
+        cwd=script_dir,
+        check=True
+        )
+
+        
        
 
         if user in VALID_USERS:
