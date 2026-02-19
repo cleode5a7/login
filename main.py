@@ -6,11 +6,9 @@ def main():
     root.title("Login")
     root.attributes("-fullscreen", True)
 
-    #replace "subprocesstest.py" with the path to your actual experiment script
+    #replace with the path to your actual experiment script and flags
     LoginApp(
-    root,
-    script_path="/home/cleo/Desktop/project/run_docker.sh",
-    script_args=["--rom", "rom1.nes"])
+    root, "docker/run_docker.sh --subject 01 --session 001 --output /tmp/mario --tasks mario")
 
 
     root.mainloop()
