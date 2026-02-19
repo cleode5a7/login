@@ -9,10 +9,10 @@ class LoginApp:
 
     #main window
 
-    def __init__(self, root,path_to_experiment, script_args=None):
+    def __init__(self, root,path_to_experiment):
         self.root = root
         self.path_to_experiment = path_to_experiment
-        self.script_args = None or []
+        
 
         self.frame = tk.Frame(root)
         self.frame.place(relx=0.5, rely=0.5, anchor="center")
@@ -34,21 +34,16 @@ class LoginApp:
     def login(self):
 
         user = self.entry_user.get()
-        script_dir = os.path.dirname(self.script_path)
-
-        subprocess.run(
-        ["bash", self.script_path] + self.script_args,
-        cwd=script_dir,
-        check=True
-        )
-
+        #change to real path
+        script_dir = "/path/to/task_stimuli"
+        
         
        
 
         if user in VALID_USERS:
             self.root.destroy()
             
-            subprocess.run(["python3", self.path_to_experiment])
+            subprocess.run(args=["/bin/bash", *self.path_to_experiment.split(' ')], cwd=script_dir, check=True)
         else:
             messagebox.showerror("Error", "Invalid credentials")
 
